@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+torch
+diffusers
+transformers
+Pillow
+opencv-python
+scikit-image
+numpy
+openai
+gradio
+python-dotenv
+pydantic
+pytest
+httpx
+EOF
