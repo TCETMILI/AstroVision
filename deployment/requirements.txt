@@ -1,9 +1,9 @@
 fastapi
 uvicorn[standard]
-torch
-diffusers
-transformers
-Pillow
+torch>=2.0.0
+diffusers>=0.17.1
+transformers>=4.30.0
+pillow
 opencv-python
 scikit-image
 numpy
@@ -13,4 +13,3 @@ python-dotenv
 pydantic
 pytest
 httpx
-EOF

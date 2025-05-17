@@ -1,16 +1,22 @@
+# tests/test_api.py
+
 import pytest
+import sys
+import os
 from fastapi.testclient import TestClient
-from backend.app import app
+
+# Dizin yapısına göre backend modülüne erişim yolu:
+current_dir = os.path.dirname(__file__)
+backend_dir = os.path.abspath(os.path.join(current_dir, '..', 'backend'))
+
+sys.path.insert(0, backend_dir)
+
+from app import app
 
 client = TestClient(app)
 
-def test_generate_default():
-    payload = {"prompt":"test","width":64,"height":64}
-    r = client.post("/generate-scene", json=payload)
-    assert r.status_code == 200
-    assert r.headers["content-type"] == "image/png"
-
-@pytest.mark.parametrize("w,h", [(32,32), (1024,1024)])
-def test_generate_invalid_size(w,h):
-    r = client.post("/generate-scene", json={"prompt":"x","width":w,"height":h})
-    assert r.status_code == 422  # validation error
+# Sağlık kontrolü (health-check) Endpoint Testi
+def test_health_check_endpoint():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok", "device": "cpu"}

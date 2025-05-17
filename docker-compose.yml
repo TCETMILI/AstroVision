@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .         # Proje kökünde backend/ ve Dockerfile var ise "."
+      dockerfile: Dockerfile  # Eğer Dockerfile başka klasörde ise yolunu verin
+    container_name: astrovision-api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile   # eğer frontend’de özel bir Dockerfile’ın varsa
+    container_name: astrovision-ui
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
